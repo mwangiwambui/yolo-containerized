@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+#Client microservice
+  frontend:
+    image: yomziee/yolo-client:1.0.0
+    ports:
+      - 3000:3000
+    stdin_open: true
+    depends_on: 
+      - backend
+    networks:
+      yolo-network:
+        ipv4_address: 172.2.0.2
+
+#Backend microservice
+  backend:
+    image: yomziee/yolo-backend:1.0
+    ports:
+      - 5000:5000
+    environment:
+      MONGODB_URI: 'mongodb://yolo2:yolo2@172.2.0.5:27017'
+    depends_on:
+      - database
+    networks:
+        yolo-network:
+          ipv4_address: 172.2.0.4
+
+  database:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: yolo2
+      MONGO_INITDB_ROOT_PASSWORD: yolo2
+    ports: 
+      - 27017:27017
+    networks:
+        yolo-network:
+          ipv4_address: 172.2.0.5
+
+networks:
+  yolo-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.2.0.0/16

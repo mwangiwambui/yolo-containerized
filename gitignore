@@ -1,0 +1,6 @@
+.env
+mongo_db
+./backend/node_modules
+./client/node_modules
+.vagrant
+.vscode
