@@ -47,4 +47,8 @@ Frontend Image
 
  For the client service
  `kubectl apply -f backend-service.yaml`
+
+ ## Link to my service
+ http://34.170.19.106:3000/
+
  
