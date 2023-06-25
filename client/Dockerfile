@@ -10,7 +10,7 @@ WORKDIR /app/client/
 COPY package*.json /app/client/
 
 # Install dependencies
-RUN npm install
+RUN npm install --omit=dev
 
 COPY . /app/client/
 
