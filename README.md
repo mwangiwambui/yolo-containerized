@@ -1,10 +1,9 @@
 # Requirements
-Make sure that you have the following installed:
-- [node](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04) 
-- npm 
-- [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/) and start the mongodb service with `sudo service mongod start`
-
-## Navigate to the Client Folder 
+Make sure you have a google project with the following services enabled
+- Artifact Registry
+- Cloud Build
+- Google Kubernetes Engine APIs
+## To push the project to 
  `cd client`
 
 ## Run the folllowing command to install the dependencies 
