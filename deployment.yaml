@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-gke
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yolo
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: yolo-frontend
+        image: us-central1-docker.pkg.dev/grand-highway-256907/yolo-client/yolo-gke:latest
+        ports:
+        - containerPort: 3030
+        env:
+          - name: PORT
+            value: "3030"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"
+
+      - name: yolo-backend
+        image: us-central1-docker.pkg.dev/grand-highway-256907/yolo-backend/yolo-gke:latest
+        ports:
+        - containerPort: 5050
+        env:
+          - name: PORT
+            value: "5050"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"
