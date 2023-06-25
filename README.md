@@ -3,20 +3,48 @@ Make sure you have a google project with the following services enabled
 - Artifact Registry
 - Cloud Build
 - Google Kubernetes Engine APIs
-## To push the project to 
- `cd client`
+## To create the image repositories on GCP
+The client repository
+ ```
+ gcloud artifacts repositories create yolo-client \
+    --project=grand-highway-256907 \
+    --repository-format=docker \
+    --location=us-central1 \
+    --description="Docker repository" 
+  ```
+The backend repository
+ ```
+ gcloud artifacts repositories create yolo-backend \
+    --project=grand-highway-256907 \
+    --repository-format=docker \
+    --location=us-central1 \
+    --description="Docker repository for backend"
 
-## Run the folllowing command to install the dependencies 
- `npm install`
+  ```
 
-## Run the folllowing to start the app
- `npm start`
+## To build the image from the docker files within the specific folders 
+Backend image
+` cd backend `
+ ```
+  gcloud builds submit \
+  --tag us-central1-docker.pkg.dev/grand-highway-256907/yolo-backend/yolo-gke .
+ ```
 
-## Open a new terminal and run the same commands in the backend folder
- `cd ../backend`
+Frontend Image
+` cd client `
+```
+  gcloud builds submit \
+  --tag us-central1-docker.pkg.dev/grand-highway-256907/yolo-client/yolo-gke .
+ ```
 
- `npm install`
+## Run the following to deploy after setting up your clusters
+ `kubectl apply -f client-deployment.yaml`
 
- `npm start`
+ For the backend deployment
+ `kubectl apply -f client-deployment.yaml`
+## Run the following to set up the service
+ `kubectl apply -f backend-service.yaml`
 
- ### Go ahead a nd add a product (note that the price field only takes a numeric input)
+ For the client service
+ `kubectl apply -f backend-service.yaml`
+ 
