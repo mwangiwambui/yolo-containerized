@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: yolo
+      tier: backend
+      track: stable
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: yolo
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: hello
+          image: "us-central1-docker.pkg.dev/grand-highway-256907/yolo-backend/yolo-gke:latest"
+          ports:
+            - name: http
+              containerPort: 5000
